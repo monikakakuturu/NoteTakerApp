@@ -127,10 +127,10 @@ const renderNoteList = (notes) => {
     noteListItems.push(create$li("No saved Notes", false));
   }
 
-  notes.forEach((note) => {
-    const $li = create$li(note.title).data(note);
+  for (var i = 0; i < notes.length; i++) {
+    const $li = create$li(notes[i].title).data(notes[i]);
     noteListItems.push($li);
-  });
+  }
 
   $noteList.append(noteListItems);
 };
