@@ -20,6 +20,7 @@ app.get("/notes", function (req, res) {
   res.sendFile(path.join(__dirname, "../../notes.html"));
 });
 
+// Handles api get request
 app.get("/api/notes", function (req, res) {
   fs.readFile(path.join(__dirname, "../../../db/db.json"), "utf8", function (
     err,
@@ -32,6 +33,7 @@ app.get("/api/notes", function (req, res) {
   });
 });
 
+// Handles api post request
 app.post("/api/notes", function (req, res) {
   var notesData;
   fs.readFile(path.join(__dirname, "../../../db/db.json"), "utf8", function (
@@ -55,6 +57,7 @@ app.post("/api/notes", function (req, res) {
   });
 });
 
+// Handles api delete request
 app.delete("/api/notes/:id", function (req, res) {
   var notesData;
   const id = req.params.id;
@@ -78,6 +81,7 @@ app.delete("/api/notes/:id", function (req, res) {
   });
 });
 
+// Writes the updated data to the backend file
 function writeToFile(notesData, res) {
   fs.writeFile(
     path.join(__dirname, "../../../db/db.json"),
