@@ -10,19 +10,19 @@ var PORT = process.env.PORT || 3000;
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "../../../public")));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "../../index.html"));
+  res.sendFile(path.join(__dirname, "./public/index.html"));
 });
 
 app.get("/notes", function (req, res) {
-  res.sendFile(path.join(__dirname, "../../notes.html"));
+  res.sendFile(path.join(__dirname, "./public/notes.html"));
 });
 
 // Handles api get request
 app.get("/api/notes", function (req, res) {
-  fs.readFile(path.join(__dirname, "../../../db/db.json"), "utf8", function (
+  fs.readFile(path.join(__dirname, "./db/db.json"), "utf8", function (
     err,
     data
   ) {
@@ -36,7 +36,7 @@ app.get("/api/notes", function (req, res) {
 // Handles api post request
 app.post("/api/notes", function (req, res) {
   var notesData;
-  fs.readFile(path.join(__dirname, "../../../db/db.json"), "utf8", function (
+  fs.readFile(path.join(__dirname, "./db/db.json"), "utf8", function (
     err,
     data
   ) {
@@ -61,7 +61,7 @@ app.post("/api/notes", function (req, res) {
 app.delete("/api/notes/:id", function (req, res) {
   var notesData;
   const id = req.params.id;
-  fs.readFile(path.join(__dirname, "../../../db/db.json"), "utf8", function (
+  fs.readFile(path.join(__dirname, "./db/db.json"), "utf8", function (
     err,
     data
   ) {
@@ -84,7 +84,7 @@ app.delete("/api/notes/:id", function (req, res) {
 // Writes the updated data to the backend file
 function writeToFile(notesData, res) {
   fs.writeFile(
-    path.join(__dirname, "../../../db/db.json"),
+    path.join(__dirname, "./db/db.json"),
     JSON.stringify(notesData),
     function (err) {
       if (err) {
